@@ -1,6 +1,5 @@
 package interfaces;
 
-import com.google.gson.Gson;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 
@@ -14,7 +13,7 @@ public interface BaseApi {
 
     String GET_ALL_CONTACTS_PATH = "/v1/contacts/";
 
-    Gson GSON = new Gson();
+   // Gson GSON = new Gson();
 
     MediaType JSON = MediaType.get("application/json");
 
