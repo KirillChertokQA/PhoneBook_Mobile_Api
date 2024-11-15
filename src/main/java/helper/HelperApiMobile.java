@@ -41,4 +41,13 @@ public class HelperApiMobile implements BaseApi {
 
     }
 
+    public Response requestRegistration(UserDtoLombok user){
+        return given()
+                .body(user)
+                .contentType(ContentType.JSON)
+                .when()
+                .get(BASE_URL +REGISTRATION_PATH)
+                .thenReturn();
+    }
+
 }

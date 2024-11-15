@@ -2,6 +2,8 @@ package mobile_tests;
 
 import config.AppiumConfig;
 import dto.UserDtoLombok;
+import helper.HelperApiMobile;
+import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import screens.AuthenticationScreen;
@@ -67,5 +69,26 @@ public class RegistrationTests extends AppiumConfig {
         authenticationScreen.clickBtnRegistration();
         Assert.assertTrue(new ErrorScreen(driver).validateErrorMessage("User already exists", 5));
 
+    }
+
+
+    @Test
+    public void registrationNegativeTest_createUserApi(){
+        UserDtoLombok user = UserDtoLombok.builder()
+                .username(generateEmail(10))
+                .password("Qwerty123!")
+                .build();
+
+        Response response = new HelperApiMobile().requestRegistration(user);
+                if(response.getStatusCode() ==200){
+        new SplashScreen(driver).goToAuthScreen();
+        AuthenticationScreen authenticationScreen =  new AuthenticationScreen(driver);
+        authenticationScreen.typeAuthenticationForm(user);
+        authenticationScreen.clickBtnRegistration();
+        Assert.assertTrue(new ErrorScreen(driver).validateErrorMessage("User already exists", 5));
+                }else {
+                    System.out.println("Smth went wrong");
+                    Assert.fail("response status code isn't 200");
+                }
     }
 }
