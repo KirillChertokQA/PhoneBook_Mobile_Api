@@ -4,6 +4,8 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ContactsScreen extends BaseScreen{
@@ -20,11 +22,12 @@ public class ContactsScreen extends BaseScreen{
     @FindBy(xpath ="/hierarchy/android.widget.Toast")
     AndroidElement popUpMessage;
 
-    @FindBy(xpath = "//*[@resource-id = 'com.sheygam.contactapp:id/rowContainer']")
+    @FindBy(xpath = "//*[@resource-id='com.sheygam.contactapp:id/rowContainer']")
     AndroidElement firstElementContactList;
 
     @FindBy(id ="android:id/button1")
     AndroidElement popUpBtnYes;
+
 
     public boolean validateHeader(){
         return textInElementPresent(headerContactsScreen, "Contact list", 5);
@@ -58,5 +61,12 @@ public class ContactsScreen extends BaseScreen{
 
     public void clickBtnYes(){
         popUpBtnYes.click();
+    }
+
+    public int getContactNumber(){
+        pause(3);
+        AndroidElement firstElementContactList1 = firstElementContactList;
+        return driver.findElements(By.xpath("//*[@resource-id='com.sheygam.contactapp:id/rowContainer']")).size();
+
     }
 }

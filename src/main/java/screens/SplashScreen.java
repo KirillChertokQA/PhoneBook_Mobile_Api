@@ -26,7 +26,7 @@ public class SplashScreen extends BaseScreen{
        try {
            new WebDriverWait(driver, time)
                    .until(ExpectedConditions.presenceOfElementLocated(
-                           By.xpath("//*[@text()='Authentication']")));
+                           By.xpath("//*[@text='Authentication']")));
        }catch (org.openqa.selenium.TimeoutException e){
            e.printStackTrace();
            System.out.println("element Authentication not find");
